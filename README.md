@@ -2,6 +2,12 @@
 
 [WAMP][] Cryptosign-based Authentication plugin for [Wampy.js][].
 
+[![NPM version][npm-image]][npm-url]
+[![Build Status][gh-build-test-image]][gh-build-test-url]
+[![Code coverage][coveralls-image]][coveralls-url]
+[![MIT License][license-image]][license-url]
+[![Known Vulnerabilities][snyk-image]][snyk-url]
+
 ## Description
 
 wampy-cryptosign exposes 3 methods:
