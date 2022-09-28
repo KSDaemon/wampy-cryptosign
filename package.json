@@ -2,7 +2,6 @@
   "name": "wampy-cryptosign",
   "version": "0.1.0",
   "description": "Wampy.js Cryptosign-based Authentication plugin",
-  "exports": "./src/wampy-cryptosign.js",
   "main": "dist/wampy-cryptosign.js",
   "scripts": {
     "build": "grunt",
@@ -46,5 +45,8 @@
   },
   "dependencies": {
     "tweetnacl": "^1.0.3"
+  },
+  "peerDependencies": {
+    "wampy": ">=7"
   }
 }
