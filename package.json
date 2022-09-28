@@ -45,8 +45,8 @@
   },
   "dependencies": {
     "tweetnacl": "^1.0.3"
-  },
-  "peerDependencies": {
-    "wampy": ">=7"
   }
+//  "peerDependencies": {
+//    "wampy": ">=7"
+//  }
 }
