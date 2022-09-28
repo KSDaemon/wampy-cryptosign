@@ -1,0 +1,43 @@
+{
+  "name": "wampy-cryptosign",
+  "version": "0.1.0",
+  "description": "Wampy.js Cryptosign-based Authentication plugin",
+  "main": "index.js",
+  "scripts": {
+    "build": "grunt",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src test",
+    "test": "NODE_ENV=test c8 mocha --exit --require @babel/register -R spec",
+    "cover": "c8 report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KSDaemon/wampy-cryptosign.git"
+  },
+  "author": "Konstantin Burkalev <KSDaemon@gmail.com> (https://ksdaemon.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KSDaemon/wampy-cryptosign/issues"
+  },
+  "homepage": "https://github.com/KSDaemon/wampy-cryptosign#readme",
+  "keywords": [
+    "WAMP",
+    "wampy",
+    "Cryptosign",
+    "Authentication"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.3",
+    "@babel/register": "^7.18.9",
+    "c8": "^7.12.0",
+    "chai": "^4.3.6",
+    "chai-bytes": "^0.1.2",
+    "coveralls": "^3.1.1",
+    "eslint": "^8.24.0",
+    "mocha": "^10.0.0"
+  },
+  "dependencies": {
+    "tweetnacl": "^1.0.3"
+  }
+}
