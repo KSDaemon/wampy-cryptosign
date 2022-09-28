@@ -2,13 +2,15 @@
   "name": "wampy-cryptosign",
   "version": "0.1.0",
   "description": "Wampy.js Cryptosign-based Authentication plugin",
-  "main": "index.js",
+  "exports": "./src/wampy-cryptosign.js",
+  "main": "dist/wampy-cryptosign.js",
   "scripts": {
     "build": "grunt",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src test",
     "test": "NODE_ENV=test c8 mocha --exit --require @babel/register -R spec",
-    "cover": "c8 report"
+    "cover": "c8 report",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,11 @@
     "chai-bytes": "^0.1.2",
     "coveralls": "^3.1.1",
     "eslint": "^8.24.0",
+    "grunt": "^1.5.3",
+    "grunt-babel": "^8.0.0",
+    "grunt-contrib-clean": "^2.0.1",
+    "grunt-contrib-uglify": "^5.2.2",
+    "load-grunt-tasks": "^5.1.0",
     "mocha": "^10.0.0"
   },
   "dependencies": {

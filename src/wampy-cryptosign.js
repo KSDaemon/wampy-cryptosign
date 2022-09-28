@@ -10,79 +10,58 @@
  *
  */
 
-// Module boilerplate to support browser globals and browserify and AMD.
-const crypto = require("tweetnacl");
-(
-    typeof define === 'function' ? function (m) {
-        define('WampyCryptosign', m);
-    } :
-        typeof exports === 'object' ? function (m) {
-            module.exports = m();
-        } :
-            function (m) {
-                this.WampyCryptosign = m();
+import { sign as NaclSign } from 'tweetnacl';
+
+export function hex2bytes(str) {
+    // Converting hex string to array of bytes
+    let l = str.length, strBytes = new Uint8Array(l / 2)
+
+    for (let i = 0; i < l; i += 2) {
+        strBytes[i / 2] = parseInt(str.substring(i, i + 2), 16)
+    }
+
+    return strBytes;
+}
+
+export function bytes2hex(bytes) {
+    if (bytes) {
+        return Array.from(bytes, function (byte) {
+            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+        }).join('');
+    } else {
+        return null;
+    }
+}
+
+export function sign(privateKey) {
+    let keyPair;
+
+    if (privateKey.length === 64) {
+        keyPair = NaclSign.keyPair.fromSeed(hex2bytes(privateKey))
+    } else {
+        keyPair = NaclSign.keyPair.fromSecretKey(hex2bytes(privateKey))
+    }
+
+    return function (method, info) {
+        if (method === 'cryptosign') {
+            let l, signature;
+
+            if (!info.challenge) {
+                throw new Error('No challenge provided!');
             }
-)(function () {
 
-    const WampyCryptosign = {},
-        crypto = require('tweetnacl');
-
-    function hex2bytes (str) {
-        // Converting hex string to array of bytes
-        let l = str.length, strBytes = new Uint8Array(l / 2)
-
-        for (let i = 0; i < l; i += 2) {
-            strBytes[i / 2] = parseInt(str.substring(i, i + 2), 16)
-        }
-
-        return strBytes;
-    }
-
-    function bytes2hex (bytes) {
-        if (bytes) {
-            return Array.from(bytes, function(byte) {
-                return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-            }).join('');
-        } else {
-            return null;
-        }
-    }
-
-    function sign (privateKey) {
-        let keyPair;
-
-        if (privateKey.length === 64) {
-            keyPair = crypto.sign.keyPair.fromSeed(hex2bytes(privateKey))
-        } else {
-            keyPair = crypto.sign.keyPair.fromSecretKey(hex2bytes(privateKey))
-        }
-
-        return function (method, info) {
-            if (method === 'cryptosign') {
-                let l, signature;
-
-                if (!info.challenge) {
-                    throw new Error('No challenge provided!');
-                }
-
-                l = info.challenge.length;
-                if ((l % 2) !== 0) {
-                    throw new Error('Expected challenge to be an even number of characters!');
-                }
-                signature = crypto.sign.detached(hex2bytes(info.challenge), keyPair.secretKey);
-
-                return bytes2hex(signature) + info.challenge;
-
-            } else {
-                throw new Error('Unknown authentication method requested!');
+            l = info.challenge.length;
+            if ((l % 2) !== 0) {
+                throw new Error('Expected challenge to be an even number of characters!');
             }
-        };
-    }
+            signature = NaclSign.detached(hex2bytes(info.challenge), keyPair.secretKey);
 
-    WampyCryptosign.hex2bytes = hex2bytes;
-    WampyCryptosign.bytes2hex = bytes2hex;
-    WampyCryptosign.sign = sign;
+            return bytes2hex(signature) + info.challenge;
 
-    return WampyCryptosign;
+        } else {
+            throw new Error('Unknown authentication method requested!');
+        }
+    };
+}
 
-});
+export default sign;

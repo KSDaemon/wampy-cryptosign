@@ -1,5 +1,6 @@
-const expect = require('chai').use(require('chai-bytes')).expect,
-    wampyCryptosign = require('../src/wampy-cryptosign');
+const expect = require('chai').use(require('chai-bytes')).expect;
+
+import * as wampyCryptosign from '../src/wampy-cryptosign';
 
 const privateKey = '6e1fde9cf9e2359a87420b65a87dc0c66136e66945196ba2475990d8a0c3a25b',
     challenge = 'b05e6b8ad4d69abf74aa3be3c0ee40ae07d66e1895b9ab09285a2f1192d562d2',
