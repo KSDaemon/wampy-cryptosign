@@ -14,13 +14,7 @@ import { sign as NaclSign } from 'tweetnacl';
 
 export function hex2bytes(str) {
     // Converting hex string to array of bytes
-    let l = str.length, strBytes = new Uint8Array(l / 2)
-
-    for (let i = 0; i < l; i += 2) {
-        strBytes[i / 2] = parseInt(str.substring(i, i + 2), 16)
-    }
-
-    return strBytes;
+    return new Uint8Array(str.match(/../g).map(h=>parseInt(h,16)));
 }
 
 export function bytes2hex(bytes) {
