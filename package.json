@@ -27,6 +27,12 @@
     "Cryptosign",
     "Authentication"
   ],
+  "dependencies": {
+    "tweetnacl": "^1.0.3"
+  },
+  "peerDependencies": {
+    "wampy": "^7.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
@@ -42,8 +48,5 @@
     "grunt-contrib-uglify": "^5.2.2",
     "load-grunt-tasks": "^5.1.0",
     "mocha": "^10.0.0"
-  },
-  "dependencies": {
-    "tweetnacl": "^1.0.3"
   }
 }
